@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import MsgBox from './components/msgBox'
+import NewMsg from './components/newMsg'
+import * as msgService from './services/messages'
 
-function App() {
+const App = () => {
+  const [messages, setMessages] = useState([])
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      msgService.getAll().then(messages =>
+        setMessages(messages)
+      )  
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Online Forum</h1>
+      <h2>Send new message</h2>
+      <NewMsg addMsg={msgService.addMsg} />
+      <h2>Messages</h2>
+      {messages.map(msg =>
+        <MsgBox key={msg._id} msg={msg} />
+      )}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

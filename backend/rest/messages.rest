@@ -1,0 +1,12 @@
+POST http://localhost:3030/api/messages
+Content-Type: application/json
+
+{
+    "text": "Hello world! This is a test message."
+}
+
+###
+
+GET http://localhost:3030/api/messages
+
+
