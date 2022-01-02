@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import MsgBox from './components/msgBox'
 import NewMsg from './components/newMsg'
 import * as msgService from './services/messages'
+import { Container, Row } from 'react-bootstrap';
 
 const App = () => {
   const [messages, setMessages] = useState([])
@@ -16,7 +17,7 @@ const App = () => {
   }, [])
 
   return (
-    <div>
+    <Container>
       <h1>Online Forum</h1>
       <h2>Send new message</h2>
       <NewMsg addMsg={msgService.addMsg} />
@@ -24,7 +25,7 @@ const App = () => {
       {messages.map(msg =>
         <MsgBox key={msg._id} msg={msg} />
       )}
-    </div>
+    </Container>
   )
 }
 

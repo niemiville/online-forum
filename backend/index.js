@@ -34,10 +34,17 @@ app.post('/api/messages', (request, response) => {
     if (body.text === undefined) {
       return response.status(400).json({ error: 'content missing' })
     } 
-  
+
+    let first = false
+    if (body.isFirst == 'true') first = true
+
     const message = new Message({
+      user: null,
+      answers: null,
+      title: body.title, 
       text: body.text,
       date: new Date(),
+      isFirst: first
     })
   
     message.save().then(savedMessage => {
