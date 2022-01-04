@@ -1,22 +1,38 @@
 import React, { useState } from 'react'
-import { Container, Row, Button, Form } from 'react-bootstrap';
+import { Container, Row, Button, Form, Modal } from 'react-bootstrap';
+import { useParams } from "react-router-dom"
 
 const NewMessage = (props) => {
     const [title, setTitle] = useState('')
     const [txt, setTxt] = useState('')
-    const [first, setFirst] = useState('')
-  
+    const [first, setFirst] = useState(props.newThread)
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const id = useParams().id
+    
+
     const submit = async (event) => {
       event.preventDefault()
-      props.addMsg({ title: title, text: txt, isFirst: first })
+      props.addMsg({ answers: id, title: title, text: txt, isFirst: first })
       setTitle('')
       setTxt('')
       setFirst('')
     }
     
     return (
-      <Container>
-        <Form onSubmit={submit}>
+      <>
+        <Button variant="primary" onClick={handleShow}>
+          {props.openButtonText}
+        </Button>
+  
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>New message</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+          <Form onSubmit={submit}>
           <Row>
             Title 
             <Form.Control
@@ -31,17 +47,21 @@ const NewMessage = (props) => {
               onChange={({ target }) => setTxt(target.value)}
             />
             </Row>
-            <Row>
-            New thread?(true/false) 
-            <Form.Control
-              value={first}
-              onChange={({ target }) => setFirst(target.value)}
-            />
-          </Row>
-          <Button type='submit'>Send message</Button>
+           
+          
         </Form>
-      </Container>
-    )
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button type='submit' variant="primary" onClick={submit}>
+              Send message
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
   }
-  
+
   export default NewMessage

@@ -40,7 +40,7 @@ app.post('/api/messages', (request, response) => {
 
     const message = new Message({
       user: null,
-      answers: null,
+      answers: body.answers,
       title: body.title, 
       text: body.text,
       date: new Date(),
