@@ -31,7 +31,7 @@ const App = () => {
           <Messages msg={messages} />
           <NewMsg addMsg={msgService.addMsg} openButtonText={'Write a message'}/>
         </Route>
-        <Route path='/threads'>
+        <Route path='/'>
           <NewMsg addMsg={msgService.addMsg} newThread={'true'} openButtonText={'Start a new thread'}/>
           <h2>Threads</h2>
           {messages.map(msg =>
