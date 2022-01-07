@@ -24,16 +24,15 @@ const App = () => {
   return (
     <Container>
     <Router>
-      <h1>Online Forum</h1>
+      <h1 className="centered">Online Forum</h1>
       <Switch>
         <Route path='/threads/:id'>
-          <h2>Messages</h2>
           <Messages msg={messages} />
           <NewMsg addMsg={msgService.addMsg} openButtonText={'Write a message'}/>
         </Route>
         <Route path='/'>
           <NewMsg addMsg={msgService.addMsg} newThread={'true'} openButtonText={'Start a new thread'}/>
-          <h2>Threads</h2>
+          <h2 className="cus-thread-title rounded">Threads</h2>
           {messages.map(msg =>
             (msg.isFirst === true) ?
             (<Thread key={msg._id} msg={msg} />) : 

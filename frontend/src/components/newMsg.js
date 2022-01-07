@@ -23,10 +23,11 @@ const NewMessage = (props) => {
     
     return (
       <>
-        <Button variant="primary" onClick={handleShow}>
+        <Container className="cus-pad clearfix">
+        <Button md="auto" className="float-end" variant="primary" onClick={handleShow}>
           {props.openButtonText}
-        </Button>
-  
+        </Button> </Container>
+
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>New message</Modal.Title>

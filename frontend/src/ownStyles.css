@@ -1,0 +1,33 @@
+body {
+    background-color: #fefae0ff;
+    color: black;
+  }
+
+.cus-title-bar {
+    background-color: #ccd5aeff;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.cus-msg-field {
+    background-color: #e9edc9ff;
+    padding: 5px;
+    padding-left: 10px;
+    margin-bottom: 4px;
+}
+
+.cus-thread-title {
+    background-color: #ccd5aeff;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    margin-bottom: 4px;
+}
+
+.centered {
+    text-align: center;
+}
+
+.cus-pad {
+    padding: 3px;
+}
