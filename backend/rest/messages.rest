@@ -9,4 +9,28 @@ Content-Type: application/json
 
 GET http://localhost:3030/api/messages
 
+###
+POST http://localhost:3030/api/threads
+Content-Type: application/json
 
+{
+    "title": "Hello title!",
+    "text": "Hello world! This is a test message.",
+    "date": "2022-01-02T20:39:09.254Z",
+    "messageCount": 1
+}
+
+###
+GET http://localhost:3030/api/threads
+
+###
+GET http://localhost:3030/api/messages/61da32af9bd7d98367853ee2
+
+###
+POST http://localhost:3030/api/messages
+Content-Type: application/json
+
+{
+    "thread": "61da4dc9cc6ea80636f45724",
+    "text": "Hello world! This is a test message."
+}

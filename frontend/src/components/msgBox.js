@@ -1,18 +1,26 @@
+import React, { useState, useEffect } from 'react'
 import { Container, Row, Col, Stack } from 'react-bootstrap';
 import { useParams } from "react-router-dom"
 import formatDate from '../utils/helpers'
 
 
+const Messages = ({getAllMessagesInThread, threads}) => {
+  const [messagesInThread, setMessagesInThread] = useState([])
+  const threadId = useParams().id
 
-const Messages = ({msg}) => {
-  const id = useParams().id
+  useEffect(() => {
+    getAllMessagesInThread(threadId).then(messages =>
+      setMessagesInThread(messages)
+    ) 
+  })
+
   return(
    <>
-    {msg.map(m => (m._id === id) ? (<h2 className="cus-thread-title rounded" key={m._id}>{m.title}</h2>) : (null))}
-    {msg.map((msg, index) => 
-      (msg.answers === id || msg._id === id) ?
-      (<MsgBox key={msg._id} msg={msg} index={index} />) :
-      (null)
+    {threads.map(m => (m._id === threadId) ? 
+    (<div><h2 className="cus-thread-title rounded" key={m._id}>{m.title}</h2>
+    <MsgBox key={m._id+1} msg={m} index={0} /></div>) : (null))}
+    {messagesInThread.map((msg, index) => 
+      <MsgBox key={msg._id} msg={msg} index={index+1} />
     )}
    </>
 )}
@@ -20,7 +28,7 @@ const Messages = ({msg}) => {
 const MsgBox = ({msg, index}) => (
   <Container >
     <Row className="clearfix cus-title-bar rounded">
-      <Col md="auto" className="float-start">{index}</Col>
+      <Col md="auto" className="float-start">{index+1}</Col>
       <Col md="auto" className="float-start">{formatDate(msg.date)}</Col> 
     </Row>
     

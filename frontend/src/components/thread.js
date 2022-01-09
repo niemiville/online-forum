@@ -5,17 +5,20 @@ import {
 } from "react-router-dom"
 import formatDate from '../utils/helpers'
 
-const Thread = ({msg}) => {
-  const threadLink = `/threads/${msg._id}`
-
+const Thread = ({thread}) => {
+  if (thread === undefined) {
+    return null
+  }
+  const threadLink = `/threads/${thread._id}`
+  
   return(   
     <Container>
       <Row className="clearfix cus-title-bar rounded">  
-        <Col md="auto" className="float-start"><Link to={threadLink}>{msg.title}</Link></Col>
-        <Col md="auto" className="float-start">{formatDate(msg.date)}</Col> 
+        <Col md="auto" className="float-start"><Link to={threadLink}>{thread.title}</Link></Col>
+        <Col md="auto" className="float-start">{formatDate(thread.date)}</Col> 
       </Row>
       <Row className="cus-msg-field rounded">
-        {msg.text}
+        {thread.text}
       </Row>
     </Container> 
   )

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Messages from './components/msgBox'
 import NewMsg from './components/newMsg'
 import Thread from './components/thread'
-import * as msgService from './services/messages'
+import NewThread from './components/newThread'
+import * as services from './services/services'
 import { Container, Row } from 'react-bootstrap';
 import {
   BrowserRouter as Router,
@@ -10,16 +11,22 @@ import {
 } from "react-router-dom"
 
 const App = () => {
-  const [messages, setMessages] = useState([])
+  const [threads, setThreads] = useState([])
 
   useEffect(() => {
+    services.getAllThreads().then(t =>
+      setThreads(t)
+    ) 
+  })
+
+/*   useEffect(() => {
     const interval = setInterval(() => {
-      msgService.getAll().then(messages =>
-        setMessages(messages)
+      services.getAllThreads().then(messages =>
+        setThreads(messages)
       )  
-    }, 5000);
+    }, 3000);
     return () => clearInterval(interval);
-  }, [])
+  }, []) */
 
   return (
     <Container>
@@ -27,19 +34,17 @@ const App = () => {
       <h1 className="centered">Online Forum</h1>
       <Switch>
         <Route path='/threads/:id'>
-          <Messages msg={messages} />
-          <NewMsg addMsg={msgService.addMsg} openButtonText={'Write a message'}/>
+          <Link to='/'>back to threads</Link>
+          <Messages getAllMessagesInThread={services.getAllMessagesInThread} threads={threads} />
+          <NewMsg addMsg={services.addMsg} openButtonText={'Write a message'}/>
         </Route>
         <Route path='/'>
-          <NewMsg addMsg={msgService.addMsg} newThread={'true'} openButtonText={'Start a new thread'}/>
+          <NewThread addThread={services.addThread} openButtonText={'Start a new thread'}/>
           <h2 className="cus-thread-title rounded">Threads</h2>
-          {messages.map(msg =>
-            (msg.isFirst === true) ?
-            (<Thread key={msg._id} msg={msg} />) : 
-            (null)
+          {threads.map(thread =>
+            <Thread key={thread._id} thread={thread} />
           )}
         </Route>
-        
       </Switch>
     </Router>
     </Container>

@@ -1,14 +1,9 @@
 const mongoose = require('mongoose');
 
 const messageSchema = new mongoose.Schema({
-  user: {
+  thread: {
     type: mongoose.Schema.Types.ObjectId,
-  },
-  answers: {
-    type: mongoose.Schema.Types.ObjectId,
-  },
-  title: {
-    type: String,
+    required: true,
   },
   text: {
     type: String,
@@ -17,17 +12,9 @@ const messageSchema = new mongoose.Schema({
   date: {
     type: Date,
     required: true,
-  },
-  isFirst: {
-    type: Boolean,
-    required: true,
   }
 });
 
-//Maybe don't need
-messageSchema.methods.generateId = async function () {
-    return new mongoose.Types.ObjectId();
-};
 // Omit the version key when serialized to JSON
 //productSchema.set('toJSON', { virtuals: false, versionKey: false });
 

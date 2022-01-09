@@ -1,18 +1,17 @@
 import React, { useState } from 'react'
 import { Container, Row, Button, Form, Modal } from 'react-bootstrap';
-import { useParams } from "react-router-dom"
 
-const NewMessage = (props) => {
+const NewThread = (props) => {
+    const [title, setTitle] = useState('')
     const [txt, setTxt] = useState('')
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-    const id = useParams().id
-  
+    
     const submit = async (event) => {
       event.preventDefault()
-      props.addMsg({ thread: id, text: txt })
+      props.addThread({ title: title, text: txt })
+      setTitle('')
       setTxt('')
       handleClose()
     }
@@ -26,11 +25,17 @@ const NewMessage = (props) => {
 
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>New message</Modal.Title>
+            <Modal.Title>New thread</Modal.Title>
           </Modal.Header>
           <Modal.Body>
           <Form onSubmit={submit}>
-
+          <Row>
+            Title 
+            <Form.Control
+              value={title}
+              onChange={({ target }) => setTitle(target.value)}
+            />
+          </Row>
           <Row>
             Message 
             <Form.Control
@@ -39,6 +44,7 @@ const NewMessage = (props) => {
             />
             </Row>
            
+          
         </Form>
           </Modal.Body>
           <Modal.Footer>
@@ -46,7 +52,7 @@ const NewMessage = (props) => {
               Close
             </Button>
             <Button type='submit' variant="primary" onClick={submit}>
-              Send message
+              Create thread
             </Button>
           </Modal.Footer>
         </Modal>
@@ -54,4 +60,4 @@ const NewMessage = (props) => {
     );
 }
 
-export default NewMessage
+export default NewThread
