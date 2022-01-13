@@ -9,6 +9,7 @@ const getAllMessages = async () => {
 }
 
 const getAllMessagesInThread = async (threadId) => {
+  console.log("asd")
   const request = axios.get(`${msgUrl}/${threadId}`)
   const response = await request
   return response.data

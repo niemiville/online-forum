@@ -4,29 +4,29 @@ import NewMsg from './components/newMsg'
 import Thread from './components/thread'
 import NewThread from './components/newThread'
 import * as services from './services/services'
-import { Container, Row } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import {
   BrowserRouter as Router,
-  Switch, Route, Link, useParams
+  Switch, Route, Link
 } from "react-router-dom"
 
 const App = () => {
   const [threads, setThreads] = useState([])
 
-  useEffect(() => {
+/*   useEffect(() => {
     services.getAllThreads().then(t =>
       setThreads(t)
     ) 
-  })
+  }) */
 
-/*   useEffect(() => {
+  useEffect(() => {
     const interval = setInterval(() => {
       services.getAllThreads().then(messages =>
         setThreads(messages)
       )  
-    }, 3000);
+    }, 5000);
     return () => clearInterval(interval);
-  }, []) */
+  }, [])
 
   return (
     <Container>

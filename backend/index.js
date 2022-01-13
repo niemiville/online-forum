@@ -5,7 +5,7 @@ const Thread = require('./models/thread')
 const express = require('express')
 const app = express()
 const cors = require('cors')
-
+const index = express.Router();
 require('dotenv').config(); 
 connection.connectDB();
 
@@ -108,3 +108,5 @@ const PORT = process.env.PORT || 3030;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
   })
+
+module.exports = index;
