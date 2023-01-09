@@ -1,6 +1,9 @@
 # Simple Online Forum
 A simple online forum built with MERN stack (MongoDB, Express, ReactJS ja Node.js). 
 
+## Configuration
+Add PORT and MONGODB_URI to backend .env file.
+
 Start backend with command npm run dev
 
 Start frontend with command npm start
